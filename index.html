@@ -5,15 +5,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% if page.title %}黑の帽 | {{ page.title }}{% else %}黑の帽{% endif %}</title>
-  
+  <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/katex.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/katex.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/contrib/auto-render.min.js"></script>
-
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       line-height: 1.8;
@@ -24,7 +19,6 @@
       flex-direction: column;
       align-items: center;
     }
-
     nav {
       width: 100%;
       background: #1a1a2e;
@@ -42,72 +36,24 @@
       padding: 0.4em 1em;
       border: 1px solid rgba(255,255,255,0.3);
       border-radius: 4px;
-      transition: all 0.2s;
     }
     nav a:hover { background: rgba(255,255,255,0.15); }
-
-    main {
-      max-width: 720px;
-      width: 100%;
-      padding: 3em 1.5em;
-      flex: 1;
-    }
-
+    main { max-width: 720px; width: 100%; padding: 3em 1.5em; flex: 1; }
     h1 { font-size: 2em; text-align: center; margin-bottom: 1.8em; color: #2c3e50; }
-    h1::after {
-      content: '';
-      display: block;
-      width: 50px;
-      height: 3px;
-      background: #3498db;
-      margin: 0.6em auto 0;
-      border-radius: 2px;
-    }
-
+    h1::after { content: ''; display: block; width: 50px; height: 3px; background: #3498db; margin: 0.6em auto 0; border-radius: 2px; }
     .post-list { list-style: none; }
-    .post-item {
-      display: flex;
-      align-items: baseline;
-      gap: 1.2em;
-      padding: 1em 1.2em;
-      margin-bottom: 0.4em;
-      border-radius: 8px;
-      transition: background 0.2s;
-    }
+    .post-item { display: flex; align-items: baseline; gap: 1.2em; padding: 1em 1.2em; margin-bottom: 0.4em; border-radius: 8px; transition: background 0.2s; }
     .post-item:hover { background: #fff; }
-
-    .post-date {
-      color: #95a5a6;
-      font-size: 0.85em;
-      min-width: 6.5em;
-    }
-    .post-link {
-      color: #2c3e50;
-      text-decoration: none;
-      font-size: 1.1em;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
+    .post-date { color: #95a5a6; font-size: 0.85em; min-width: 6.5em; }
+    .post-link { color: #2c3e50; text-decoration: none; font-size: 1.1em; font-weight: 500; }
     .post-link:hover { color: #3498db; }
-
-    /* 文章详情 */
     .article h1 { text-align: left; margin-bottom: 0.5em; }
     .article h1::after { display: none; }
     .article .date { color: #95a5a6; font-size: 0.9em; margin-bottom: 2em; padding-bottom: 1em; border-bottom: 1px solid #e9ecef; }
-    .article .content { font-size: 1.05em; }
-    .article .content p { margin-bottom: 1em; }
-    .article .content pre { background: #f4f4f4; padding: 1em; border-radius: 6px; overflow-x: auto; }
-
-    footer {
-      width: 100%;
-      text-align: center;
-      padding: 1.5em;
-      color: #bdc3c7;
-      font-size: 0.85em;
-      border-top: 1px solid #e9ecef;
-    }
-
-    /* 深色模式 */
+    .content { font-size: 1.05em; }
+    .content p { margin-bottom: 1em; }
+    .content pre { background: #f4f4f4; padding: 1em; border-radius: 6px; overflow-x: auto; }
+    footer { width: 100%; text-align: center; padding: 1.5em; color: #bdc3c7; font-size: 0.85em; border-top: 1px solid #e9ecef; }
     @media (prefers-color-scheme: dark) {
       body { background: #1a1a2e; color: #ccc; }
       h1 { color: #eee; }
@@ -115,13 +61,12 @@
       .post-link { color: #ddd; }
       .post-link:hover { color: #58a6ff; }
       .article .date { border-color: #2a2a4a; color: #666; }
-      .article .content pre { background: #16213e; }
+      .content pre { background: #16213e; }
       footer { border-color: #2a2a4a; color: #666; }
     }
   </style>
 </head>
 <body>
-
   <nav>
     <span class="brand">{{ site.title }}</span>
     <a href="/">← 回到首页</a>
@@ -131,18 +76,8 @@
   <main class="article">
     <h1>{{ page.title }}</h1>
     <div class="date">{{ page.date | date: "%Y-%m-%d" }}</div>
-    <div class="content">{{ content }}</div>
+    <div class="content">{{ page.content | markdownify }}</div>
   </main>
-  <script>
-    renderMathInElement(document.querySelector('.content'), {
-      delimiters: [
-        {left: "$$", right: "$$", display: true},
-        {left: "\\[", right: "\\]", display: true},
-        {left: "$", right: "$", display: false},
-        {left: "\\(", right: "\\)", display: false}
-      ]
-    });
-  </script>
   {% else %}
   <main>
     <h1>最新文章</h1>
@@ -159,5 +94,20 @@
 
   <footer>&copy; {{ site.time | date: '%Y' }} {{ site.title }}</footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/contrib/auto-render.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left: "$$", right: "$$", display: true},
+          {left: "\\[", right: "\\]", display: true},
+          {left: "$", right: "$", display: false},
+          {left: "\\(", right: "\\)", display: false}
+        ],
+        throwOnError: false
+      });
+    });
+  </script>
 </body>
 </html>
