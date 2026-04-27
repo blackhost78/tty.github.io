@@ -8,80 +8,149 @@
   <title>{{ site.title }}</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 3em 1.5em;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      line-height: 2;
-      color: #333;
-      background: #fff;
+      line-height: 1.8;
+      color: #2c3e50;
+      background: #f8f9fa;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
     }
-    h1 { 
-      font-size: 2em; 
-      border-bottom: 2px solid #eee; 
-      padding-bottom: 0.4em; 
-      margin-bottom: 1.5em;
-      text-align: center;
+
+    /* ===== 顶部导航 ===== */
+    nav {
       width: 100%;
-    }
-    .post-list { 
-      list-style: none; 
-      width: 100%; 
-      text-align: center; 
-    }
-    .post-list li { 
-      margin: 1.2em 0; 
+      background: #2c3e50;
+      padding: 1em 2em;
       display: flex;
-      justify-content: center;
-      align-items: baseline;
-      gap: 1em;
-      font-size: 1.2em;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
     }
-    .post-date { 
-      color: #999; 
-      font-size: 0.8em; 
+    nav .brand {
+      font-size: 1.3em;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    nav .home-link {
+      color: #ecf0f1;
+      text-decoration: none;
+      font-size: 0.95em;
+      padding: 0.4em 1em;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    nav .home-link:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.6);
+    }
+
+    /* ===== 主体内容 ===== */
+    main {
+      max-width: 720px;
+      width: 100%;
+      padding: 3em 1.5em;
+      flex: 1;
+    }
+    h1 {
+      font-size: 2em;
+      text-align: center;
+      margin-bottom: 1.8em;
+      color: #2c3e50;
+      position: relative;
+    }
+    h1::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: #3498db;
+      margin: 0.6em auto 0;
+      border-radius: 2px;
+    }
+
+    /* ===== 文章列表 ===== */
+    .post-list { list-style: none; }
+    .post-item {
+      display: flex;
+      align-items: baseline;
+      gap: 1.2em;
+      padding: 1em 1.2em;
+      margin-bottom: 0.4em;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .post-item:hover { background: #fff; }
+
+    .post-date {
+      color: #95a5a6;
+      font-size: 0.85em;
+      min-width: 6.5em;
       font-family: "SF Mono", "Monaco", "Consolas", monospace;
     }
-    a { color: #0366d6; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    a:visited { color: #6f42c1; }
-    footer { 
-      margin-top: auto;
-      padding-top: 2em;
-      color: #bbb; 
-      font-size: 0.8em; 
-      border-top: 1px solid #eee; 
+    .post-title {
+      color: #2c3e50;
+      text-decoration: none;
+      font-size: 1.1em;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .post-title:hover { color: #3498db; }
+
+    /* ===== 页脚 ===== */
+    footer {
       width: 100%;
       text-align: center;
+      padding: 1.5em;
+      color: #bdc3c7;
+      font-size: 0.85em;
+      border-top: 1px solid #e9ecef;
+      background: #fff;
     }
+
+    /* ===== 深色模式 ===== */
     @media (prefers-color-scheme: dark) {
-      body { background: #1a1a1a; color: #ccc; }
-      h1, footer { border-color: #333; }
-      a { color: #58a6ff; }
-      a:visited { color: #bc8cff; }
+      body { background: #1a1a2e; color: #ccc; }
+      nav { background: #16213e; }
+      h1 { color: #eee; }
+      h1::after { background: #58a6ff; }
+      .post-item:hover { background: #16213e; }
       .post-date { color: #666; }
+      .post-title { color: #ddd; }
+      .post-title:hover { color: #58a6ff; }
+      footer { background: #16213e; border-color: #2a2a4a; color: #666; }
     }
   </style>
 </head>
 <body>
-  <h1>{{ site.title }}</h1>
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-      </li>
-    {% endfor %}
-  </ul>
+  <!-- 顶部导航 -->
+  <nav>
+    <span class="brand">{{ site.title }}</span>
+    <a href="/" class="home-link">首页</a>
+  </nav>
 
+  <!-- 文章列表 -->
+  <main>
+    <h1>最新文章</h1>
+    <ul class="post-list">
+      {% for post in site.posts %}
+        <li class="post-item">
+          <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+          <a href="{{ post.url }}" class="post-title">{{ post.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </main>
+
+  <!-- 页脚 -->
   <footer>
     &copy; {{ site.time | date: '%Y' }} {{ site.title }}
   </footer>
+
 </body>
 </html>
