@@ -2,7 +2,6 @@ title: 黑の帽
 description: blackhost78's Personal Blog
 baseurl: ""
 
-# ==================== 默认全局配置 ====================
 defaults:
   - scope:
       path: ""
@@ -310,50 +309,7 @@ defaults:
             （除特别声明或转载文章外）
           related_posts:
             enable: true
-        home:
-          append_to_section_tag:
-            - key: data-markdown
-            - key: data-separator
-              value: <!-- .slide -->
-            - key: data-separator-vertical
-              value: <!-- .slide vertical=true -->
-          prepend: |
-            <link
-              rel="stylesheet"
-              href="https://cdn.jsdelivr.net/combine/npm/reveal.js@5.2.1/dist/reveal.min.css,npm/reveal.js@5.2.1/dist/theme/serif.min.css"
-            />
-            <style>
-              .reveal {
-                font-feature-settings: "calt" 1, "liga" 1;
-                --r-code-font: "Monaspace Xenon", "极影毁片文宋 Medium", var(--fontStack-monospace, monospace);
-                --r-main-font: var(--r-code-font);
-                --r-heading-font: var(--r-main-font);
-                --r-main-color: var(--fgColor-default, var(--color-fg-default));
-                --r-heading-color: var(--r-main-color);
-                --r-link-color: var(--fgColor-accent, var(--color-accent-fg));
-                --r-background-color: var(--bgColor-default, var(--color-canvas-default));
-              }
-              .reveal .slides {
-                text-align: left;
-              }
-            </style>
-          append: |
-            <script
-              src="https://cdn.jsdelivr.net/combine/npm/reveal.js@5.2.1/dist/reveal.min.js,npm/reveal.js@5.2.1/plugin/markdown/markdown.min.js,npm/reveal.js@5.2.1/plugin/math/math.min.js"
-              defer="defer"
-              onload="
-              let x = document.getElementById('wrap-content');
-              x.classList.add('reveal');
-              Reveal.initialize({
-                scrollActivationWidth: null,
-                height: '100%',
-                mouseWheel: true,
-                navigationMode: 'linear',
-                plugins: [ RevealMarkdown,RevealMath.KaTeX ]
-              });
-            "></script>
 
-# ==================== 插件 ====================
 plugins:
   - jekyll-readme-index
   - jekyll-default-layout
@@ -369,12 +325,10 @@ remote_theme: https://github.com/wu-kan/jekyll-theme-WuK@5.5.0
 readme_index:
   with_frontmatter: true
 
-# ==================== 站点基础设置 ====================
 permalink: pretty
 timezone: Asia/Shanghai
 future: true
 
-# ==================== Markdown 引擎 ====================
 markdown: kramdown
 kramdown:
   input: GFM
@@ -385,7 +339,6 @@ kramdown:
     span:
       disable: false
 
-# ==================== HTML 压缩 ====================
 compress_html:
   clippings: all
   comments: []
