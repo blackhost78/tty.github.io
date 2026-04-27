@@ -4,9 +4,18 @@ baseurl: ""
 permalink: pretty
 timezone: Asia/Shanghai
 future: true
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: default
+
 markdown: kramdown
 kramdown:
   input: GFM
+
 plugins:
   - jekyll-feed
   - jekyll-sitemap
