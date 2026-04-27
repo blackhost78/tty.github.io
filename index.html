@@ -1,14 +1,74 @@
 ---
-layout: default
 ---
-<h1>黑の帽</h1>
-<p>欢迎来到我的博客。</p>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ site.title }}</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2em 1.5em;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.8;
+      color: #333;
+      background: #fff;
+    }
+    h1 { 
+      font-size: 1.8em; 
+      border-bottom: 2px solid #eee; 
+      padding-bottom: 0.4em; 
+      margin-bottom: 1.5em;
+    }
+    .post-list { list-style: none; }
+    .post-list li { 
+      margin: 0.7em 0; 
+      display: flex;
+      align-items: baseline;
+      gap: 0.8em;
+    }
+    .post-date { 
+      color: #999; 
+      font-size: 0.85em; 
+      min-width: 6.5em;
+      font-family: "SF Mono", "Monaco", "Consolas", monospace;
+    }
+    a { color: #0366d6; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    a:visited { color: #6f42c1; }
+    footer { 
+      margin-top: 3em; 
+      color: #bbb; 
+      font-size: 0.8em; 
+      border-top: 1px solid #eee; 
+      padding-top: 1.2em; 
+    }
+    @media (prefers-color-scheme: dark) {
+      body { background: #1a1a1a; color: #ccc; }
+      h1, footer { border-color: #333; }
+      a { color: #58a6ff; }
+      a:visited { color: #bc8cff; }
+      .post-date { color: #666; }
+    }
+  </style>
+</head>
+<body>
+  <h1>{{ site.title }}</h1>
 
-<ul>
-{% for post in site.posts %}
-  <li>
-    <a href="{{ post.url }}">{{ post.title }}</a>
-    <small>{{ post.date | date: "%Y-%m-%d" }}</small>
-  </li>
-{% endfor %}
-</ul>
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li>
+        <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <footer>
+    &copy; {{ site.time | date: '%Y' }} {{ site.title }}
+  </footer>
+</body>
+</html>
