@@ -6,6 +6,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  
+  <!-- KaTeX 数学公式渲染 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/contrib/auto-render.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left: "$$", right: "$$", display: true},
+          {left: "\\[", right: "\\]", display: true},
+          {left: "$", right: "$", display: false},
+          {left: "\\(", right: "\\)", display: false}
+        ]
+      });
+    });
+  </script>
+
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -58,7 +76,6 @@
       border-radius: 2px;
     }
 
-    /* 首页文章列表 */
     .post-list { list-style: none; }
     .post-item {
       display: flex;
@@ -85,7 +102,6 @@
     }
     .post-title:hover { color: #3498db; }
 
-    /* 文章详情页 */
     .article h1 { text-align: left; margin-bottom: 0.3em; }
     .article h1::after { display: none; }
     .article .post-meta { color: #95a5a6; font-size: 0.9em; margin-bottom: 2em; padding-bottom: 1em; border-bottom: 1px solid #e9ecef; }
@@ -99,6 +115,9 @@
       overflow-x: auto;
       font-size: 0.9em;
     }
+
+    /* KaTeX 公式在深色模式下的颜色 */
+    .katex { color: inherit; }
 
     footer {
       width: 100%;
@@ -122,6 +141,7 @@
       .article .post-meta { color: #666; border-color: #2a2a4a; }
       .article .content { color: #ccc; }
       .article .content pre { background: #16213e; }
+      .katex { color: #ccc; }
       footer { background: #16213e; border-color: #2a2a4a; color: #666; }
     }
   </style>
@@ -134,7 +154,6 @@
   </nav>
 
   {% if page.url == "/" %}
-    <!-- 首页：文章列表 -->
     <main>
       <h1>最新文章</h1>
       <ul class="post-list">
@@ -147,7 +166,6 @@
       </ul>
     </main>
   {% else %}
-    <!-- 文章详情页 -->
     <main class="article">
       <h1>{{ page.title }}</h1>
       <div class="post-meta">{{ page.date | date: "%Y-%m-%d" }}</div>
